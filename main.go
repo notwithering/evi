@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"crypto/aes"
 	"crypto/cipher"
 	"crypto/rand"
 	"crypto/sha256"
@@ -291,13 +290,6 @@ func encryptFile(fileName string) error {
 	}
 
 	return nil
-}
-
-func getBlock() (cipher.Block, error) {
-	switch algorithms[algorithm] {
-	default: // AES-256
-		return aes.NewCipher(hash256(key))
-	}
 }
 
 func hash256(key []byte) []byte {
