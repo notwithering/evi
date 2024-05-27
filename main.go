@@ -93,6 +93,8 @@ chooseKey:
 					continue chooseAlgorithm
 				}
 
+				algorithm = index
+
 				break chooseAlgorithm
 			}
 		case "m":
@@ -115,6 +117,8 @@ chooseKey:
 					fmt.Printf(eviError, "index out of range")
 					continue chooseMode
 				}
+
+				mode = index
 
 				break chooseMode
 			}
