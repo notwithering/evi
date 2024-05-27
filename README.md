@@ -7,7 +7,7 @@
 When opening a file, it decrypts it using a user-specified key. The program then sends you over to your default text editor to easily edit the file. After you exit the editor, the file is then easily secured with defaulted AES-256 encryption.
 
 ```ruby
-$ evi test.txt 
+$ evi test.txt
 :: Encryption key:
 :: [d]etails   [a]lgorithm   [m]ode
 >> supersecret
