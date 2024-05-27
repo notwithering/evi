@@ -40,12 +40,6 @@ func decryptFile(fileName string) error {
 	}
 	file.Close()
 
-	file, err = os.OpenFile(fileName, os.O_WRONLY|os.O_TRUNC, 0o644)
-	if err != nil {
-		return err
-	}
-	defer file.Close()
-
 	c, err := getBlock()
 	if err != nil {
 		return err
@@ -70,9 +64,15 @@ func decryptFile(fileName string) error {
 			return err
 		}
 
+		file, err = os.OpenFile(fileName, os.O_WRONLY|os.O_TRUNC, 0o644)
+		if err != nil {
+			return err
+		}
+
 		if _, err := file.Write(plainText); err != nil {
 			return err
 		}
+		file.Close()
 	}
 
 	return nil
@@ -89,12 +89,6 @@ func encryptFile(fileName string) error {
 		return err
 	}
 	file.Close()
-
-	file, err = os.OpenFile(fileName, os.O_WRONLY|os.O_TRUNC, 0o644)
-	if err != nil {
-		return err
-	}
-	defer file.Close()
 
 	c, err := getBlock()
 	if err != nil {
@@ -115,9 +109,15 @@ func encryptFile(fileName string) error {
 
 		encrypted := gcm.Seal(nonce[:], nonce[:], b, nil)
 
+		file, err = os.OpenFile(fileName, os.O_WRONLY|os.O_TRUNC, 0o644)
+		if err != nil {
+			return err
+		}
+
 		if _, err := file.Write(encrypted); err != nil {
 			return err
 		}
+		file.Close()
 	}
 
 	return nil
