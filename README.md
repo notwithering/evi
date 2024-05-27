@@ -17,6 +17,20 @@ $ cat test.txt
 %,y^�X⏭5:��M��t���{43+�;2��D
 ```
 
+## Installation
+
+### Installing
+
+```bash
+go install github.com/notwithering/evi@latest
+```
+
+### Testing
+
+```bash
+go run github.com/notwithering/evi@latest file.txt
+```
+
 ## Current Options
 
 > [!NOTE]
