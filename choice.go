@@ -94,3 +94,24 @@ chooseMode:
 		break chooseMode
 	}
 }
+
+func removeFile() {
+	fmt.Printf(eviInfo, "Remove file? [Y/n]")
+	fmt.Print(eviInput)
+
+	in, err := line()
+	if err != nil {
+		fmt.Printf(eviError, err)
+		os.Exit(1)
+	}
+
+	switch strings.ToLower(in) {
+	case "", "y":
+		if err := os.Remove(filename); err != nil {
+			fmt.Printf(eviError, err)
+			os.Exit(1)
+		}
+	default:
+		return
+	}
+}
