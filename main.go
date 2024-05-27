@@ -46,6 +46,11 @@ func main() {
 		}
 	}
 
+	if filename == "" {
+		fmt.Printf(eviError, "no file specified")
+		return
+	}
+
 chooseKey:
 	for {
 		fmt.Printf(eviInfo, "Encryption key:")
