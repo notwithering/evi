@@ -19,6 +19,9 @@ $ cat test.txt
 
 ## Installation
 
+> [!WARNING]
+> Losing your key will result in you not being able to decrypt your file.
+
 ### Installing
 
 ```bash
