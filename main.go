@@ -119,7 +119,7 @@ chooseKey:
 				break chooseMode
 			}
 		default:
-			key = hash([]byte(in))
+			key = []byte(in)
 			break chooseKey
 		}
 
@@ -212,15 +212,9 @@ func decryptFile(fileName string) error {
 	}
 	defer file.Close()
 
-	var c cipher.Block
-
-	switch algorithms[algorithm] {
-	case "AES-256":
-		var err error
-		c, err = aes.NewCipher(key)
-		if err != nil {
-			return err
-		}
+	c, err := getBlock()
+	if err != nil {
+		return err
 	}
 
 	switch modes[mode] {
@@ -268,15 +262,9 @@ func encryptFile(fileName string) error {
 	}
 	defer file.Close()
 
-	var c cipher.Block
-
-	switch algorithms[algorithm] {
-	case "AES-256":
-		var err error
-		c, err = aes.NewCipher(key)
-		if err != nil {
-			return err
-		}
+	c, err := getBlock()
+	if err != nil {
+		return err
 	}
 
 	switch modes[mode] {
@@ -301,7 +289,14 @@ func encryptFile(fileName string) error {
 	return nil
 }
 
-func hash(key []byte) []byte {
+func getBlock() (cipher.Block, error) {
+	switch algorithms[algorithm] {
+	default: // AES-256
+		return aes.NewCipher(hash256(key))
+	}
+}
+
+func hash256(key []byte) []byte {
 	h := sha256.New()
 	h.Write(key)
 	return h.Sum(nil)
