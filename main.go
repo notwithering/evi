@@ -4,7 +4,7 @@ func main() {
 	getEditor()
 	getFilename()
 	chooseKey()
-	decryptAtStart()
+	decrypt()
 	openEditor()
-	encryptAtEnd()
+	encrypt()
 }

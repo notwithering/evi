@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-func decryptAtStart() {
+func decrypt() {
 	if fileExists(filename) {
 		if err := decryptFile(filename); err != nil {
 			fmt.Printf(eviError, err)
@@ -19,7 +19,7 @@ func decryptAtStart() {
 	}
 }
 
-func encryptAtEnd() {
+func encrypt() {
 	if fileExists(filename) {
 		if err := encryptFile(filename); err != nil {
 			fmt.Printf(eviError, err)
