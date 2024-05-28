@@ -40,3 +40,4 @@ go run github.com/notwithering/evi@latest file.txt
 > More options are being added such as different algorithms, modes, etc.
 
 - SHA-256/AES-256-GCM
+- SHA-512/AES-128-CBC
