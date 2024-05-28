@@ -40,8 +40,6 @@ func line(password bool) (string, error) {
 		switch key {
 		case keyboard.KeyEnter:
 			fmt.Print("\r\n")
-			fmt.Print(string(input))
-			fmt.Print("\r\n")
 			return string(input), nil
 		case keyboard.KeyArrowLeft:
 			if position > 0 {
