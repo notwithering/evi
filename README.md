@@ -9,7 +9,7 @@ When opening a file, it decrypts it using a user-specified key. The program then
 ```ruby
 $ evi test.txt
 :: Encryption key:
-:: [d]etails   [a]lgorithm   [m]ode
+:: [d]etails   [e]ncryption
 >> *******
 
 $ echo "hello" > test.txt
@@ -34,15 +34,9 @@ go install github.com/notwithering/evi@latest
 go run github.com/notwithering/evi@latest file.txt
 ```
 
-## Current Options
+## Current Encryption Options
 
 > [!NOTE]
 > More options are being added such as different algorithms, modes, etc.
 
-### Algorithms
-
-- AES-256
-
-### Modes
-
-- GCM
+- SHA-256/AES-256-GCM
