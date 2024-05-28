@@ -10,6 +10,7 @@ func decrypt() {
 	if fileExists(filename) {
 		if err := decryptFile(filename); err != nil {
 			fmt.Printf(eviError, err)
+			fmt.Print("\n")
 			editFile()
 			os.Exit(1)
 		}
