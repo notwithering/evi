@@ -1,20 +1,24 @@
 package main
 
 import (
+	"bytes"
 	"crypto/aes"
 	"crypto/cipher"
 	"crypto/rand"
 	"crypto/sha256"
+	"crypto/sha512"
 	"fmt"
 	"io"
 )
 
 var encryptions = []string{
 	"SHA-256/AES-256-GCM",
+	"SHA-512/AES-128-CBC",
 }
 
 var encryptFunction = []func([]byte) ([]byte, error){
 	encryptsha256aes256gcm,
+	encryptsha512aes128cbc,
 }
 
 func encryptsha256aes256gcm(b []byte) ([]byte, error) {
@@ -40,8 +44,34 @@ func encryptsha256aes256gcm(b []byte) ([]byte, error) {
 	return gcm.Seal(nonce[:], nonce[:], b, nil), nil
 }
 
+func encryptsha512aes128cbc(b []byte) ([]byte, error) {
+	hkey := sha512.Sum512(key)
+
+	c, err := aes.NewCipher(hkey[:16])
+	if err != nil {
+		return nil, err
+	}
+
+	padding := c.BlockSize() - len(b)%c.BlockSize()
+	padtext := bytes.Repeat([]byte{byte(padding)}, padding)
+	b = append(b, padtext...)
+
+	ciphertext := make([]byte, aes.BlockSize+len(b))
+	iv := ciphertext[:aes.BlockSize]
+
+	if _, err := io.ReadFull(rand.Reader, iv); err != nil {
+		return nil, err
+	}
+
+	mode := cipher.NewCBCEncrypter(c, iv)
+	mode.CryptBlocks(ciphertext[aes.BlockSize:], b)
+
+	return ciphertext, nil
+}
+
 var decryptFunction = []func([]byte) ([]byte, error){
 	decryptsha256aes256gcm,
+	decryptsha512aes128cbc,
 }
 
 func decryptsha256aes256gcm(b []byte) ([]byte, error) {
@@ -72,4 +102,45 @@ func decryptsha256aes256gcm(b []byte) ([]byte, error) {
 	}
 
 	return plainText, nil
+}
+
+func decryptsha512aes128cbc(ciphertext []byte) ([]byte, error) {
+	hkey := sha512.Sum512(key)
+
+	c, err := aes.NewCipher(hkey[:16]) // Use the first 16 bytes of the SHA-512 hash
+	if err != nil {
+		return nil, err
+	}
+
+	if len(ciphertext) < aes.BlockSize {
+		return nil, fmt.Errorf("ciphertext too short")
+	}
+
+	iv := ciphertext[:aes.BlockSize]
+	ciphertext = ciphertext[aes.BlockSize:]
+
+	if len(ciphertext)%aes.BlockSize != 0 {
+		return nil, fmt.Errorf("ciphertext is not a multiple of the block size")
+	}
+
+	mode := cipher.NewCBCDecrypter(c, iv)
+	mode.CryptBlocks(ciphertext, ciphertext)
+
+	length := len(ciphertext)
+	if length == 0 {
+		return nil, fmt.Errorf("input is empty")
+	}
+
+	padlen := int(ciphertext[length-1])
+	if padlen > length {
+		return nil, fmt.Errorf("padding size is larger than the input")
+	}
+
+	for _, v := range ciphertext[length-padlen:] {
+		if int(v) != padlen {
+			return nil, fmt.Errorf("invalid padding")
+		}
+	}
+
+	return ciphertext[:length-padlen], nil
 }
