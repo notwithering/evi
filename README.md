@@ -10,7 +10,7 @@ When opening a file, it decrypts it using a user-specified key. The program then
 $ evi test.txt
 :: Encryption key:
 :: [d]etails   [a]lgorithm   [m]ode
->> supersecret
+>> *******
 
 $ echo "hello" > test.txt
 $ cat test.txt
