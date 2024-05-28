@@ -19,25 +19,27 @@ chooseKey:
 			os.Exit(1)
 		}
 
-		fmt.Print("\n")
-
 		switch strings.ToLower(in) {
 		case "d":
+			fmt.Print("\n")
 			fmt.Printf(eviInfoPair, "Algorithm", algorithms[algorithm])
 			fmt.Printf(eviInfoPair, "Editor", editor)
 			fmt.Printf(eviInfoPair, "File", filename)
 			fmt.Printf(eviInfoPair, "Hashing", "SHA256")
 			fmt.Printf(eviInfoPair, "Mode", modes[mode])
+			fmt.Print("\n")
 		case "a":
+			fmt.Print("\n")
 			chooseAlgorithm()
+			fmt.Print("\n")
 		case "m":
+			fmt.Print("\n")
 			chooseMode()
+			fmt.Print("\n")
 		default:
 			key = []byte(in)
 			break chooseKey
 		}
-
-		fmt.Print("\n")
 	}
 }
 
