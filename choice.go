@@ -115,3 +115,22 @@ func removeFile() {
 		return
 	}
 }
+
+func editFile() {
+	fmt.Printf(eviInfo, "Continue editing file without encryption? [y/N]")
+	fmt.Print(eviInput)
+
+	in, err := line(false)
+	if err != nil {
+		fmt.Printf(eviError, err)
+		os.Exit(1)
+	}
+
+	switch strings.ToLower(in) {
+	case "", "n":
+		return
+	default:
+		openEditor()
+		return
+	}
+}
