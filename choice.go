@@ -13,7 +13,7 @@ chooseKey:
 		fmt.Printf(eviInfo, "[d]etails   [a]lgorithm   [m]ode")
 		fmt.Print(eviInput)
 
-		in, err := line()
+		in, err := line(true)
 		if err != nil {
 			fmt.Printf(eviError, err)
 			os.Exit(1)
@@ -39,6 +39,8 @@ chooseKey:
 
 		fmt.Print("\n")
 	}
+
+	fmt.Print("\n")
 }
 
 func chooseAlgorithm() {
@@ -99,7 +101,7 @@ func removeFile() {
 	fmt.Printf(eviInfo, "Remove file? [Y/n]")
 	fmt.Print(eviInput)
 
-	in, err := line()
+	in, err := line(false)
 	if err != nil {
 		fmt.Printf(eviError, err)
 		os.Exit(1)
