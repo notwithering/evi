@@ -13,7 +13,7 @@ const (
 )
 
 var (
-	algorithm, mode  int
+	encryption       int
 	key              []byte
 	editor, filename string
 )

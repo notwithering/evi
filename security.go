@@ -1,9 +1,6 @@
 package main
 
 import (
-	"crypto/cipher"
-	"crypto/rand"
-	"crypto/sha256"
 	"fmt"
 	"io"
 	"os"
@@ -41,40 +38,20 @@ func decryptFile(fileName string) error {
 	}
 	file.Close()
 
-	c, err := getBlock()
+	plainText, err := decryptFunction[encryption](b)
 	if err != nil {
 		return err
 	}
 
-	switch modes[mode] {
-	case "GCM":
-		gcm, err := cipher.NewGCM(c)
-		if err != nil {
-			return err
-		}
-
-		nonceSize := gcm.NonceSize()
-
-		if len(b) < nonceSize {
-			return fmt.Errorf("cipher text is smaller than the nonce size")
-		}
-
-		nonce, cipherBytes := b[:nonceSize], b[nonceSize:]
-		plainText, err := gcm.Open(nil, nonce, cipherBytes, nil)
-		if err != nil {
-			return err
-		}
-
-		file, err = os.OpenFile(fileName, os.O_WRONLY|os.O_TRUNC, 0o644)
-		if err != nil {
-			return err
-		}
-
-		if _, err := file.Write(plainText); err != nil {
-			return err
-		}
-		file.Close()
+	file, err = os.OpenFile(fileName, os.O_WRONLY|os.O_TRUNC, 0o644)
+	if err != nil {
+		return err
 	}
+
+	if _, err := file.Write(plainText); err != nil {
+		return err
+	}
+	file.Close()
 
 	return nil
 }
@@ -91,41 +68,20 @@ func encryptFile(fileName string) error {
 	}
 	file.Close()
 
-	c, err := getBlock()
+	encrypted, err := encryptFunction[encryption](b)
 	if err != nil {
 		return err
 	}
 
-	switch modes[mode] {
-	case "GCM":
-		gcm, err := cipher.NewGCM(c)
-		if err != nil {
-			return err
-		}
-
-		nonce := make([]byte, gcm.NonceSize())
-		if _, err := io.ReadFull(rand.Reader, nonce); err != nil {
-			return err
-		}
-
-		encrypted := gcm.Seal(nonce[:], nonce[:], b, nil)
-
-		file, err = os.OpenFile(fileName, os.O_WRONLY|os.O_TRUNC, 0o644)
-		if err != nil {
-			return err
-		}
-
-		if _, err := file.Write(encrypted); err != nil {
-			return err
-		}
-		file.Close()
+	file, err = os.OpenFile(fileName, os.O_WRONLY|os.O_TRUNC, 0o644)
+	if err != nil {
+		return err
 	}
 
-	return nil
-}
+	if _, err := file.Write(encrypted); err != nil {
+		return err
+	}
+	file.Close()
 
-func hash256(key []byte) []byte {
-	h := sha256.New()
-	h.Write(key)
-	return h.Sum(nil)
+	return nil
 }
