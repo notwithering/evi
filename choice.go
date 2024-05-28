@@ -42,6 +42,10 @@ chooseEncryption:
 	for {
 		fmt.Printf(eviInfo, "Encryption:")
 		for i, a := range encryptions {
+			if i == encryption {
+				fmt.Printf(eviChoiceSelected, i+1, a)
+				continue
+			}
 			fmt.Printf(eviChoice, i+1, a)
 		}
 
