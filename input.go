@@ -28,6 +28,7 @@ func line(password bool) (string, error) {
 		}
 
 		if r == rune(tcell.KeyEnter) {
+			fmt.Print("\r\n")
 			return string(input), nil
 		}
 

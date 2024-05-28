@@ -39,8 +39,6 @@ chooseKey:
 
 		fmt.Print("\n")
 	}
-
-	fmt.Print("\n")
 }
 
 func chooseAlgorithm() {
