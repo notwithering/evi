@@ -10,7 +10,7 @@ import (
 	"golang.org/x/term"
 )
 
-// TODO: make this more like a text box (add backspace, cursor control, keybinds, etc.)
+// FIXME: make this more like a text box (add backspace, cursor control, keybinds, etc.)
 func line(password bool) (string, error) {
 	state, err := term.MakeRaw(int(os.Stdin.Fd()))
 	if err != nil {
