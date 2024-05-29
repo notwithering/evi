@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 
 	"github.com/eiannone/keyboard"
 )
@@ -114,16 +115,16 @@ func line(password bool) (string, error) {
 	}
 }
 
-// func chooseIndex() (int, error) {
-// 	in, err := line(false)
-// 	if err != nil {
-// 		return 0, err
-// 	}
+func chooseIndex() (int, error) {
+	in, err := line(false)
+	if err != nil {
+		return 0, err
+	}
 
-// 	inputtedIndex, err := strconv.Atoi(in)
-// 	if err != nil {
-// 		return 0, err
-// 	}
+	inputtedIndex, err := strconv.Atoi(in)
+	if err != nil {
+		return 0, err
+	}
 
-// 	return inputtedIndex - 1, nil
-// }
+	return inputtedIndex - 1, nil
+}

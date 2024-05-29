@@ -10,7 +10,7 @@ func chooseKey() {
 chooseKey:
 	for {
 		fmt.Printf(eviInfo, "Encryption key:")
-		fmt.Printf(eviInfo, "[d]etails")
+		fmt.Printf(eviInfo, "[d]etails   [e]ncryption")
 		fmt.Print(eviInput)
 
 		in, err := line(true)
@@ -26,10 +26,10 @@ chooseKey:
 			fmt.Printf(eviInfoPair, "Encryption", encryptions[encryption])
 			fmt.Printf(eviInfoPair, "File", filename)
 			fmt.Print("\n")
-		// case "e":
-		// 	fmt.Print("\n")
-		// 	chooseEncryption()
-		// 	fmt.Print("\n")
+		case "e":
+			fmt.Print("\n")
+			chooseEncryption()
+			fmt.Print("\n")
 		default:
 			key = []byte(in)
 			break chooseKey
@@ -37,36 +37,36 @@ chooseKey:
 	}
 }
 
-// func chooseEncryption() {
-// chooseEncryption:
-// 	for {
-// 		fmt.Printf(eviInfo, "Encryption:")
-// 		for i, a := range encryptions {
-// 			if i == encryption {
-// 				fmt.Printf(eviChoiceSelected, i+1, a)
-// 				continue
-// 			}
-// 			fmt.Printf(eviChoice, i+1, a)
-// 		}
+func chooseEncryption() {
+chooseEncryption:
+	for {
+		fmt.Printf(eviInfo, "Encryption:")
+		for i, a := range encryptions {
+			if i == encryption {
+				fmt.Printf(eviChoiceSelected, i+1, a)
+				continue
+			}
+			fmt.Printf(eviChoice, i+1, a)
+		}
 
-// 		fmt.Print(eviInput)
+		fmt.Print(eviInput)
 
-// 		index, err := chooseIndex()
-// 		if err != nil {
-// 			fmt.Printf(eviError, err)
-// 			continue chooseEncryption
-// 		}
+		index, err := chooseIndex()
+		if err != nil {
+			fmt.Printf(eviError, err)
+			continue chooseEncryption
+		}
 
-// 		if index < 0 || index >= len(encryptions) {
-// 			fmt.Printf(eviError, "index out of range")
-// 			continue chooseEncryption
-// 		}
+		if index < 0 || index >= len(encryptions) {
+			fmt.Printf(eviError, "index out of range")
+			continue chooseEncryption
+		}
 
-// 		encryption = index
+		encryption = index
 
-// 		break chooseEncryption
-// 	}
-// }
+		break chooseEncryption
+	}
+}
 
 func removeFile() {
 	fmt.Printf(eviInfo, "Remove file? [Y/n]")
