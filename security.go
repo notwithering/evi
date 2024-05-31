@@ -4,6 +4,7 @@ import (
 	"crypto/aes"
 	"crypto/cipher"
 	"crypto/rand"
+	"crypto/sha256"
 	"fmt"
 	"io"
 	"os"
@@ -131,4 +132,10 @@ func decryptBytes(b []byte) ([]byte, error) {
 	}
 
 	return plainText, nil
+}
+
+func hash(b []byte) []byte {
+	h := sha256.New()
+	h.Write(b)
+	return h.Sum(nil)
 }

@@ -39,7 +39,7 @@ func main() {
 	if keyFlag == "" {
 		chooseKey()
 	} else {
-		key = []byte(keyFlag)
+		key = hash([]byte(keyFlag))
 		zero.Zero(&keyFlag)
 	}
 	if !noDecrypt {
