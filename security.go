@@ -1,6 +1,10 @@
 package main
 
 import (
+	"crypto/aes"
+	"crypto/cipher"
+	"crypto/rand"
+	"crypto/sha256"
 	"fmt"
 	"io"
 	"os"
@@ -37,7 +41,7 @@ func decryptFile(fileName string) error {
 	}
 	file.Close()
 
-	plainText, err := decryptFunction[encryption](b)
+	plainText, err := decryptBytes(b)
 	if err != nil {
 		return err
 	}
@@ -67,7 +71,7 @@ func encryptFile(fileName string) error {
 	}
 	file.Close()
 
-	encrypted, err := encryptFunction[encryption](b)
+	encrypted, err := encryptBytes(b)
 	if err != nil {
 		return err
 	}
@@ -83,4 +87,57 @@ func encryptFile(fileName string) error {
 	file.Close()
 
 	return nil
+}
+
+func encryptBytes(b []byte) ([]byte, error) {
+	h := sha256.New()
+	h.Write(key)
+	hkey := h.Sum(nil)
+
+	c, err := aes.NewCipher(hkey)
+	if err != nil {
+		return nil, err
+	}
+
+	gcm, err := cipher.NewGCM(c)
+	if err != nil {
+		return nil, err
+	}
+
+	nonce := make([]byte, gcm.NonceSize())
+	if _, err := io.ReadFull(rand.Reader, nonce); err != nil {
+		return nil, err
+	}
+
+	return gcm.Seal(nonce[:], nonce[:], b, nil), nil
+}
+
+func decryptBytes(b []byte) ([]byte, error) {
+	h := sha256.New()
+	h.Write(key)
+	hkey := h.Sum(nil)
+
+	c, err := aes.NewCipher(hkey)
+	if err != nil {
+		return nil, err
+	}
+
+	gcm, err := cipher.NewGCM(c)
+	if err != nil {
+		return nil, err
+	}
+
+	nonceSize := gcm.NonceSize()
+
+	if len(b) < nonceSize {
+		return nil, fmt.Errorf("cipher text is smaller than the nonce size")
+	}
+
+	nonce, cipherBytes := b[:nonceSize], b[nonceSize:]
+	plainText, err := gcm.Open(nil, nonce, cipherBytes, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return plainText, nil
 }

@@ -4,12 +4,12 @@
 
 **Evi** is a layer that sits inbetween encryption and your text editor to provide a seamless experience of instantaneous security while you write your documents.
 
-When opening a file, it decrypts it using a user-specified key. The program then sends you over to your default text editor to easily edit the file. After you exit the editor, the file is then easily secured with defaulted AES-256 encryption.
+When opening a file, it decrypts it using a user-specified key. The program then sends you over to your default text editor to easily edit the file. After you exit the editor, the file is then easily secured with AES-256 encryption.
 
 ```ruby
 $ evi test.txt
 :: Encryption key:
-:: [d]etails   [e]ncryption
+:: [d]etails
 >> *******
 
 $ echo "hello" > test.txt
@@ -33,11 +33,3 @@ go install github.com/notwithering/evi@latest
 ```bash
 go run github.com/notwithering/evi@latest file.txt
 ```
-
-## Current Encryption Options
-
-> [!NOTE]
-> More options are being added such as different algorithms, modes, etc.
-
-- SHA-256/AES-256-GCM
-- SHA-512/AES-128-CBC

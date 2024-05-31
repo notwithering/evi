@@ -14,7 +14,6 @@ const (
 )
 
 var (
-	encryption       int
 	key              []byte
 	editor, filename string
 )
