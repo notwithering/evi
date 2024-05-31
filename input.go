@@ -39,6 +39,9 @@ func line(password bool) (string, error) {
 		switch key {
 		case keyboard.KeyEnter:
 			fmt.Print("\r\n")
+			if password {
+				defer burnBytes(input)
+			}
 			return string(input), nil
 		case keyboard.KeyArrowLeft:
 			if position > 0 {
