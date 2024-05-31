@@ -24,10 +24,10 @@ func main() {
 
 	flag.Usage = func() {
 		fmt.Println("Usage: evi [options...] <file>")
-		fmt.Println("  -k, -key          Preset the encryption key")
-		fmt.Println("      -no-decrypt   Stop the program from decrypting the file")
-		fmt.Println("      -no-edit      Simply decrypt then re-encrypt the file")
-		fmt.Println("      -no-encrypt   Stop the program from re-encrypting the file")
+		fmt.Println(" -k, -key         Preset the encryption key")
+		fmt.Println("     -no-decrypt  Stop the program from decrypting the file")
+		fmt.Println("     -no-edit     Simply decrypt then re-encrypt the file")
+		fmt.Println("     -no-encrypt  Stop the program from re-encrypting the file")
 	}
 
 	flag.Parse()
