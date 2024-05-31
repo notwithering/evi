@@ -23,8 +23,9 @@ chooseKey:
 		case "d":
 			fmt.Print("\n")
 			fmt.Printf(eviInfoPair, "Editor", editor)
-			fmt.Printf(eviInfoPair, "Encryption", "SHA-256/AES-256-GCM")
+			fmt.Printf(eviInfoPair, "Encryption", "AES-256-GCM")
 			fmt.Printf(eviInfoPair, "File", filename)
+			fmt.Printf(eviInfoPair, "Hashing", "SHA-256M")
 			fmt.Print("\n")
 		default:
 			key = []byte(in)
