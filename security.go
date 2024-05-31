@@ -4,7 +4,6 @@ import (
 	"crypto/aes"
 	"crypto/cipher"
 	"crypto/rand"
-	"crypto/sha256"
 	"fmt"
 	"io"
 	"os"
@@ -90,11 +89,7 @@ func encryptFile(fileName string) error {
 }
 
 func encryptBytes(b []byte) ([]byte, error) {
-	h := sha256.New()
-	h.Write(key)
-	hkey := h.Sum(nil)
-
-	c, err := aes.NewCipher(hkey)
+	c, err := aes.NewCipher(key)
 	if err != nil {
 		return nil, err
 	}
@@ -113,11 +108,7 @@ func encryptBytes(b []byte) ([]byte, error) {
 }
 
 func decryptBytes(b []byte) ([]byte, error) {
-	h := sha256.New()
-	h.Write(key)
-	hkey := h.Sum(nil)
-
-	c, err := aes.NewCipher(hkey)
+	c, err := aes.NewCipher(key)
 	if err != nil {
 		return nil, err
 	}
@@ -140,4 +131,14 @@ func decryptBytes(b []byte) ([]byte, error) {
 	}
 
 	return plainText, nil
+}
+
+func burnString(s *string) {
+	byteSlice := []byte(*s)
+
+	for i := range byteSlice {
+		byteSlice[i] = 0
+	}
+
+	*s = string(byteSlice)
 }

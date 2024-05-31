@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/sha256"
 	"fmt"
 	"os"
 	"strings"
@@ -28,7 +29,12 @@ chooseKey:
 			fmt.Printf(eviInfoPair, "Hashing", "SHA-256M")
 			fmt.Print("\n")
 		default:
-			key = []byte(in)
+			h := sha256.New()
+			h.Write([]byte(in))
+			key = h.Sum(nil)
+
+			burnString(&in)
+
 			break chooseKey
 		}
 	}

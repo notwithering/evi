@@ -38,6 +38,7 @@ func main() {
 		chooseKey()
 	} else {
 		key = []byte(keyFlag)
+		burnString(&keyFlag)
 	}
 	if !noDecrypt {
 		decrypt()
