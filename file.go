@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
 	"strings"
@@ -15,7 +16,7 @@ func fileExists(filename string) bool {
 }
 
 func getFilename() {
-	for _, a := range os.Args[1:] {
+	for _, a := range flag.Args() {
 		if !strings.HasPrefix(a, "-") {
 			filename = a
 			break

@@ -18,7 +18,7 @@ func getEditor() {
 }
 
 func openEditor() {
-	cmd := exec.Command(editor, os.Args[1:]...)
+	cmd := exec.Command(editor, filename)
 
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
