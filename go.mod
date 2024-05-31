@@ -12,5 +12,6 @@ require (
 require (
 	github.com/joho/godotenv v1.4.0 // indirect
 	github.com/notwithering/sgr v0.0.0-20240525174708-d8436a98dce9
+	github.com/notwithering/zero v0.0.0-20240531102839-3bddb9e0be87
 	github.com/rogpeppe/go-internal v1.9.0 // indirect
 )

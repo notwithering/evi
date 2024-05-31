@@ -132,19 +132,3 @@ func decryptBytes(b []byte) ([]byte, error) {
 
 	return plainText, nil
 }
-
-func burnString(s *string) {
-	byteSlice := []byte(*s)
-
-	for i := range byteSlice {
-		byteSlice[i] = 0
-	}
-
-	*s = string(byteSlice)
-}
-
-func burnBytes(b []byte) {
-	for i := range b {
-		b[i] = 0
-	}
-}

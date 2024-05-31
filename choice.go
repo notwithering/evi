@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/notwithering/zero"
 )
 
 func chooseKey() {
@@ -33,7 +35,7 @@ chooseKey:
 			h.Write([]byte(in))
 			key = h.Sum(nil)
 
-			burnString(&in)
+			zero.Zero(&in)
 
 			break chooseKey
 		}

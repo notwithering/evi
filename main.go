@@ -3,6 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
+
+	"github.com/notwithering/zero"
 )
 
 var (
@@ -38,7 +40,7 @@ func main() {
 		chooseKey()
 	} else {
 		key = []byte(keyFlag)
-		burnString(&keyFlag)
+		zero.Zero(&keyFlag)
 	}
 	if !noDecrypt {
 		decrypt()
