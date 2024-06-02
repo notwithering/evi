@@ -27,7 +27,7 @@ chooseKey:
 			fmt.Printf(eviInfoPair, "Editor", editor)
 			fmt.Printf(eviInfoPair, "Encryption", "AES-256-GCM")
 			fmt.Printf(eviInfoPair, "File", filename)
-			fmt.Printf(eviInfoPair, "Hashing", "SHA-256M")
+			fmt.Printf(eviInfoPair, "Hashing", "SHA-256")
 			fmt.Print("\n")
 		default:
 			key = hash([]byte(in))
