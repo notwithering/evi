@@ -6,7 +6,7 @@ _evi_completions() {
 	cur="${COMP_WORDS[COMP_CWORD]}"
 	prev="${COMP_WORDS[COMP_CWORD-1]}"
 	opts="-k -key -no-decrypt -no-edit -no-encrypt -help"
-	doubleopts="--no-decrypt --no-edit --no-encrypt --help"
+	doubleopts="--key --no-decrypt --no-edit --no-encrypt --help"
 
 	if [[ ${cur} == --* ]]; then
 		COMPREPLY=( $(compgen -W "${doubleopts}" -- ${cur}) )
