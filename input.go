@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/eiannone/keyboard"
-	"github.com/notwithering/zero"
+	"github.com/notwithering/memory"
 )
 
 func line(password bool) (string, error) {
@@ -41,7 +41,7 @@ func line(password bool) (string, error) {
 		case keyboard.KeyEnter:
 			fmt.Print("\r\n")
 			if password {
-				defer zero.Zero(&input)
+				defer memory.Zero(&input)
 			}
 			return string(input), nil
 		case keyboard.KeyArrowLeft:

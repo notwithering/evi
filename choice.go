@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/notwithering/zero"
+	"github.com/notwithering/memory"
 )
 
 func chooseKey() {
@@ -32,7 +32,7 @@ chooseKey:
 		default:
 			key = hash([]byte(in))
 
-			zero.Zero(&in)
+			memory.Zero(&in)
 
 			break chooseKey
 		}

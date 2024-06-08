@@ -4,7 +4,7 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/notwithering/zero"
+	"github.com/notwithering/memory"
 )
 
 var (
@@ -41,7 +41,7 @@ func main() {
 		chooseKey()
 	} else {
 		key = hash([]byte(keyFlag))
-		zero.Zero(&keyFlag)
+		memory.Zero(&keyFlag)
 	}
 	if !noDecrypt {
 		decrypt()
