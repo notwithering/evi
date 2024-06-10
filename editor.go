@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"strings"
 
 	"github.com/gobuffalo/envy"
 )
@@ -18,7 +19,12 @@ func getEditor() {
 }
 
 func openEditor() {
-	cmd := exec.Command(editor, filename)
+	var cmd *exec.Cmd
+	if strings.HasPrefix(filename, "-") {
+		cmd = exec.Command(editor, "--", filename)
+	} else {
+		cmd = exec.Command(editor, filename)
+	}
 
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
