@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io"
 	"os"
-	"strings"
 )
 
 func fileExists(filename string) bool {
@@ -17,12 +16,7 @@ func fileExists(filename string) bool {
 }
 
 func getFilename() {
-	for _, a := range flag.Args() {
-		if !strings.HasPrefix(a, "-") {
-			filename = a
-			break
-		}
-	}
+	filename = flag.Arg(0)
 
 	if len(os.Args) == 1 {
 		fmt.Println("evi: try 'evi -help' for more information")
