@@ -4,7 +4,7 @@
 
 **Evi** is a layer that sits inbetween encryption and your text editor to provide a seamless experience of instantaneous security while you write your documents.
 
-When opening a file, it decrypts it using a user-specified key. The program then sends you over to your default text editor to easily edit the file. After you exit the editor, the file is then easily secured with AES-256 encryption.
+When opening a file, it decrypts it using a user-specified key. The program then sends you over to your default text editor to easily edit the file. After you exit the editor, the file is then quickly secured with AES-256 encryption.
 
 ```ruby
 $ evi test.txt
