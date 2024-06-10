@@ -23,6 +23,11 @@ func getFilename() {
 		}
 	}
 
+	if len(os.Args) == 1 {
+		fmt.Println("evi: try 'evi -help' for more information")
+		os.Exit(0)
+	}
+
 	if filename == "" {
 		fmt.Printf(eviError, "no file specified")
 		os.Exit(1)
