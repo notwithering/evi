@@ -30,61 +30,65 @@ func getFilename() {
 }
 
 func decryptFile(fileName string) error {
-	file, err := os.OpenFile(fileName, os.O_RDONLY, 0o644)
+	file, err := os.OpenFile(fileName, os.O_RDWR, 0o644)
 	if err != nil {
 		return err
 	}
+	defer file.Close()
 
 	b, err := io.ReadAll(file)
 	if err != nil {
 		return err
 	}
-	file.Close()
 
 	plainText, err := decryptBytes(b)
 	if err != nil {
 		return err
 	}
 
-	file, err = os.OpenFile(fileName, os.O_WRONLY|os.O_TRUNC, 0o644)
-	if err != nil {
+	if _, err := file.Seek(0, 0); err != nil {
+		return err
+	}
+
+	if err := file.Truncate(0); err != nil {
 		return err
 	}
 
 	if _, err := file.Write(plainText); err != nil {
 		return err
 	}
-	file.Close()
 
 	return nil
 }
 
 func encryptFile(fileName string) error {
-	file, err := os.OpenFile(fileName, os.O_RDONLY, 0o644)
+	file, err := os.OpenFile(fileName, os.O_RDWR, 0o644)
 	if err != nil {
 		return err
 	}
+	defer file.Close()
 
 	b, err := io.ReadAll(file)
 	if err != nil {
 		return err
 	}
-	file.Close()
 
 	encrypted, err := encryptBytes(b)
 	if err != nil {
 		return err
 	}
 
-	file, err = os.OpenFile(fileName, os.O_WRONLY|os.O_TRUNC, 0o644)
-	if err != nil {
+	if _, err := file.Seek(0, 0); err != nil {
+		return err
+	}
+
+	if err := file.Truncate(0); err != nil {
 		return err
 	}
 
 	if _, err := file.Write(encrypted); err != nil {
 		return err
 	}
-	file.Close()
 
 	return nil
 }
