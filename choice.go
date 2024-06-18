@@ -40,7 +40,7 @@ chooseKey:
 }
 
 func removeFile() {
-	fmt.Printf(eviInfo, "Remove file? [Y/n]")
+	fmt.Printf(eviInfo, "Remove file? [y/N]")
 	fmt.Print(eviInput)
 
 	in, err := line(false)
@@ -50,7 +50,7 @@ func removeFile() {
 	}
 
 	switch strings.ToLower(in) {
-	case "", "y":
+	case "y":
 		if err := os.Remove(filename); err != nil {
 			fmt.Printf(eviError, err)
 			os.Exit(1)
