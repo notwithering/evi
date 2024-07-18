@@ -49,6 +49,9 @@ func main() {
 	if !noEdit {
 		openEditor()
 	}
+
+	// TODO: instead of only re-encryptying after the editor closes: re-encrypt after anything is written to the file.
+
 	if !noEncrypt {
 		encrypt()
 	}
