@@ -27,7 +27,7 @@ func main() {
 		fmt.Println(" -h, -help        Show this help menu")
 		fmt.Println(" -k, -key         Preset the encryption key")
 		fmt.Println("     -no-decrypt  Stop the program from decrypting the file")
-		fmt.Println("     -no-edit     Simply decrypt then re-encrypt the file")
+		fmt.Println("     -no-edit     Stop the program from opening the editor")
 		fmt.Println("     -no-encrypt  Stop the program from re-encrypting the file")
 	}
 
