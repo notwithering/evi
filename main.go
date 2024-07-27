@@ -8,15 +8,19 @@ import (
 )
 
 var (
-	noDecrypt bool
-	noEdit    bool
-	noEncrypt bool
+	confirmKey bool
+	noDecrypt  bool
+	noEdit     bool
+	noEncrypt  bool
 )
 
 func main() {
 	var keyFlag string
-	flag.StringVar(&keyFlag, "key", "", "")
-	flag.StringVar(&keyFlag, "k", "", "")
+	flag.BoolVar(&confirmKey, "confirm-key", confirmKey, "")
+	flag.BoolVar(&confirmKey, "c", confirmKey, "")
+
+	flag.StringVar(&keyFlag, "key", keyFlag, "")
+	flag.StringVar(&keyFlag, "k", keyFlag, "")
 
 	flag.BoolVar(&noDecrypt, "no-decrypt", noDecrypt, "")
 	flag.BoolVar(&noEdit, "no-edit", noEdit, "")
@@ -24,11 +28,12 @@ func main() {
 
 	flag.Usage = func() {
 		fmt.Println("Usage: evi [options...] <file>")
-		fmt.Println(" -h, -help        Show this help menu")
-		fmt.Println(" -k, -key         Preset the encryption key")
-		fmt.Println("     -no-decrypt  Stop the program from decrypting the file")
-		fmt.Println("     -no-edit     Stop the program from opening the editor")
-		fmt.Println("     -no-encrypt  Stop the program from re-encrypting the file")
+		fmt.Println(" -c, -confirm-key  Program asks for key twice")
+		fmt.Println(" -h, -help         Show this help menu")
+		fmt.Println(" -k, -key          Preset the encryption key")
+		fmt.Println("     -no-decrypt   Stop the program from decrypting the file")
+		fmt.Println("     -no-edit      Stop the program from opening the editor")
+		fmt.Println("     -no-encrypt   Stop the program from re-encrypting the file")
 	}
 
 	flag.Parse()
