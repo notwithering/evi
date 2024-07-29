@@ -24,12 +24,7 @@ $ cat test.txt
 
 ### Installing
 
-```bash
-go install github.com/notwithering/evi@latest
-```
-
-### Testing
-
-```bash
-go run github.com/notwithering/evi@latest file.txt
-```
+|Platform|Command|
+|--------|-------|
+|<img src="https://github.com/devicons/devicon/blob/master/icons/archlinux/archlinux-original.svg" title="archlinux" alt="Arch Linux" width="75" height="75"/>|yay -S evi
+|<img src="https://github.com/devicons/devicon/blob/master/icons/go/go-original-wordmark.svg" title="go" alt="Go" width="75" height="75"/>|go install github.com/notwithering/evi@latest
