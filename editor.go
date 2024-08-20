@@ -1,19 +1,19 @@
 package main
 
 import (
-	"fmt"
 	"os"
 	"os/exec"
 	"strings"
 
 	"github.com/gobuffalo/envy"
+	"github.com/k0kubun/go-ansi"
 )
 
 func getEditor() {
 	var err error
 	editor, err = envy.MustGet("EDITOR")
 	if err != nil {
-		fmt.Printf(eviError, "no editor specified in $EDITOR")
+		ansi.Printf(eviError, "no editor specified in $EDITOR")
 		os.Exit(1)
 	}
 }

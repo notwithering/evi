@@ -4,7 +4,10 @@ go 1.22.3
 
 require github.com/gobuffalo/envy v1.10.2
 
-require golang.org/x/mod v0.18.0 // indirect
+require (
+	github.com/mattn/go-isatty v0.0.20 // indirect
+	golang.org/x/mod v0.18.0 // indirect
+)
 
 require (
 	github.com/eiannone/keyboard v0.0.0-20220611211555-0d226195f203
@@ -13,6 +16,7 @@ require (
 
 require (
 	github.com/joho/godotenv v1.5.1 // indirect
+	github.com/k0kubun/go-ansi v0.0.0-20180517002512-3bf9e2903213
 	github.com/notwithering/memory v0.0.0-20240607060204-bca31187bede
 	github.com/notwithering/sgr v0.0.0-20240525174708-d8436a98dce9
 	github.com/rogpeppe/go-internal v1.12.0 // indirect

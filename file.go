@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"io"
 	"os"
+
+	"github.com/k0kubun/go-ansi"
 )
 
 func fileExists(filename string) bool {
@@ -24,7 +26,7 @@ func getFilename() {
 	}
 
 	if filename == "" {
-		fmt.Printf(eviError, "no file specified")
+		ansi.Printf(eviError, "no file specified")
 		os.Exit(1)
 	}
 }

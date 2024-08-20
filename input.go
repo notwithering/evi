@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/eiannone/keyboard"
+	"github.com/k0kubun/go-ansi"
 	"github.com/notwithering/memory"
 )
 
@@ -27,7 +28,7 @@ func line(password bool) (string, error) {
 		}
 		fmt.Print(" ")
 		for range distance {
-			fmt.Print("\x1b[D")
+			ansi.CursorBack(1)
 		}
 	}
 
@@ -39,7 +40,7 @@ func line(password bool) (string, error) {
 
 		switch key {
 		case keyboard.KeyEnter:
-			fmt.Print("\r\n")
+			ansi.Print("\r\n")
 			if password {
 				defer memory.Zero(&input)
 			}
@@ -47,12 +48,12 @@ func line(password bool) (string, error) {
 		case keyboard.KeyArrowLeft:
 			if position > 0 {
 				position--
-				fmt.Print("\x1b[D")
+				ansi.CursorBack(1)
 			}
 		case keyboard.KeyArrowRight:
 			if position < len(input) {
 				position++
-				fmt.Print("\x1b[C")
+				ansi.CursorForward(1)
 			}
 		case keyboard.KeyBackspace, keyboard.KeyBackspace2:
 			if len(input) > 0 && position > 0 {
@@ -64,7 +65,7 @@ func line(password bool) (string, error) {
 				}
 				input = inputBuf
 				position--
-				fmt.Print("\x1b[D")
+				ansi.CursorBack(1)
 
 				reprintFromPosition()
 			}
@@ -82,12 +83,12 @@ func line(password bool) (string, error) {
 			}
 		case keyboard.KeyCtrlA:
 			for range position {
-				fmt.Print("\x1b[D")
+				ansi.CursorBack(1)
 			}
 			position = 0
 		case keyboard.KeyCtrlE:
 			for range len(input) - position {
-				fmt.Print("\x1b[C")
+				ansi.CursorForward(1)
 			}
 			position = len(input)
 		// TODO: Add CTRL+U, CTRL+K, and CTRL+W

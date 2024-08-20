@@ -8,12 +8,14 @@ import (
 	"fmt"
 	"io"
 	"os"
+
+	"github.com/k0kubun/go-ansi"
 )
 
 func decrypt() {
 	if fileExists(filename) {
 		if err := decryptFile(filename); err != nil {
-			fmt.Printf(eviError, err)
+			ansi.Printf(eviError, err)
 			os.Exit(1)
 		}
 	}
@@ -22,7 +24,7 @@ func decrypt() {
 func encrypt() {
 	if fileExists(filename) {
 		if err := encryptFile(filename); err != nil {
-			fmt.Printf(eviError, err)
+			ansi.Printf(eviError, err)
 			fmt.Print("\n")
 			removeFile()
 		}
