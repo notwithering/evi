@@ -27,9 +27,7 @@ func line(password bool) (string, error) {
 			fmt.Print(string(input[position:]))
 		}
 		fmt.Print(" ")
-		for range distance {
-			ansi.CursorBack(1)
-		}
+		ansi.CursorBack(distance)
 	}
 
 	for {
@@ -82,9 +80,7 @@ func line(password bool) (string, error) {
 				reprintFromPosition()
 			}
 		case keyboard.KeyCtrlA:
-			for range position {
-				ansi.CursorBack(1)
-			}
+			ansi.CursorBack(position)
 			position = 0
 		case keyboard.KeyCtrlE:
 			for range len(input) - position {
